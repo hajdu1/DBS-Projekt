@@ -1,4 +1,5 @@
 from datetime import datetime
+from dateutil import parser
 
 
 # checks whether the requested page number is valid
@@ -42,6 +43,30 @@ def get_order_companies(order_by, order_type, whitelist):
     return ''
 
 
+def get_order_submissions_v2(order_by, order_type, whitelist):
+    if order_by is not None and order_by.lower() in whitelist:
+
+        if order_type is not None and order_type.lower() == 'asc':
+            return order_by.lower()
+        else:
+            return '-' + order_by.lower()
+
+    # default:
+    return '-id'
+
+
+def get_order_companies_v2(order_by, order_type, whitelist):
+    if order_by is not None and order_by.lower() in whitelist:
+
+        if order_type is not None and order_type.lower() == 'asc':
+            return order_by.lower()
+        else:
+            return '-' + order_by.lower()
+
+    # default:
+    return None
+
+
 # checks whether the requested order type is valid
 def get_order_type_submissions(order_type):
     whitelist = [
@@ -56,7 +81,7 @@ def get_order_type_submissions(order_type):
     return 'desc'
 
 
-# checks whether the requested date is in ISO 8601 format
+# ---------------------------- Deprecated ----------------------------
 def get_date(date):
     if date is not None:
         try:
@@ -68,7 +93,17 @@ def get_date(date):
     return None
 
 
-# chceks whether there is a search query and kkeps the format foll CIN field comparison
+# -------------- Replaces deprecated function get_date() -------------
+def correct_date(date_input):
+    try:
+        if date_input is not None:
+            return parser.parse(date_input)
+        return None
+    except (ValueError, OverflowError):
+        return None
+
+
+# chceks whether there is a search query and keeps the format for full CIN field comparison
 def get_query(query):
     if query is not None:
         return query

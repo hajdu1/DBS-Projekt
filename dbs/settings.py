@@ -76,11 +76,12 @@ WSGI_APPLICATION = 'dbs.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
+DATABASES = {                                                   # changed to postesql and configured to fit my database
 
     'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'DB_NAME',
+            'OPTIONS': {'options': '-c search_path=ov,public'},
             'USER': 'USER_NAME',
             'PASSWORD': 'MY_PASSWORD',
             'HOST': 'localhost',
@@ -119,7 +120,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

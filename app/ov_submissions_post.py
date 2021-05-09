@@ -1,7 +1,8 @@
 import json                                 # used to check if a date is in the iso format
-from datetime import datetime               # used to round up the number of pages
+from datetime import datetime               # provides timestamps
 from django.db import connection            # used to execute sql commands
 from django.http import JsonResponse        # used to return responses in json format
+from dateutil import parser                 # checks date format
 
 
 # chcecks for errors in a numeric field from post body
@@ -24,8 +25,8 @@ def check_date(content, key):
     if key in content:
 
         try:
-            date = datetime.fromisoformat(content[key].replace('Z', '+00:00'))
-        except (ValueError, AttributeError):
+            date = parser.parse((content[key]))
+        except (ValueError, AttributeError, OverflowError):
             errors.append('invalid_range')
             return errors
 

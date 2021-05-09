@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('v1/', include('app.urls')),            # URL to request and view the servers uptime
+    path('v1/', include('app.urlsv1')),            # URL to request and view the servers uptime
+    path('v2/', include('app.urlsv2')),
     path('admin/', admin.site.urls),
 ]

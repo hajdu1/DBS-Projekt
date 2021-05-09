@@ -38,9 +38,9 @@ def get_submissions(request):
 
                      'substring_query': get_substring_query(request.GET.get('query')),
 
-                     'date_gte': get_date(request.GET.get('registration_date_gte')),
+                     'date_gte': correct_date(request.GET.get('registration_date_gte')),
 
-                     'date_lte': get_date(request.GET.get('registration_date_lte'))
+                     'date_lte': correct_date(request.GET.get('registration_date_lte'))
                      }
 
     # prepares the WHERE statement

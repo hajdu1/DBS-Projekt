@@ -32,9 +32,9 @@ def get_companies(request):
 
                      'substring_query': get_substring_query(request.GET.get('query')),
 
-                     'last_update_gte': get_date(request.GET.get('last_update_gte')),
+                     'last_update_gte': correct_date(request.GET.get('last_update_gte')),
 
-                     'last_update_lte': get_date(request.GET.get('last_update_lte'))
+                     'last_update_lte': correct_date(request.GET.get('last_update_lte'))
                      }
 
     # prepares the WHERE statement
